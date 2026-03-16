@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Tuff Spare Parts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family: Arial;
+text-align:center;
+background:#f5f5f5;
+}
+
+input,select,textarea{
+width:90%;
+padding:10px;
+margin:6px;
+}
+
+button{
+padding:15px;
+background:#25D366;
+color:white;
+border:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Tuff Spare Parts</h1>
+
+<p>Karibu Tuff Spare Parts 👋</p>
+
+<input type="text" id="name" placeholder="Jina">
+
+<input type="text" id="phone" placeholder="Simu">
+
+<select id="brand">
+
+<option>Land Rover</option>
+<option>Audi</option>
+<option>Volkswagen</option>
+<option>Mercedes Benz</option>
+<option>BMW</option>
+<option>Mini Cooper</option>
+
+</select>
+
+<input type="text" id="model" placeholder="Model">
+
+<input type="text" id="chassis" placeholder="Chassis Number">
+
+<input type="text" id="part" placeholder="Spare Part">
+
+<textarea id="notes" placeholder="Maelezo"></textarea>
+
+<button onclick="sendOrder()">Tuma Order WhatsApp</button>
+
+<script>
+
+function sendOrder(){
+
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let brand=document.getElementById("brand").value;
+let model=document.getElementById("model").value;
+let chassis=document.getElementById("chassis").value;
+let part=document.getElementById("part").value;
+let notes=document.getElementById("notes").value;
+
+let message="ORDER TUFF SPARE PARTS %0A"
++"Jina: "+name+"%0A"
++"Simu: "+phone+"%0A"
++"Brand: "+brand+"%0A"
++"Model: "+model+"%0A"
++"Chassis: "+chassis+"%0A"
++"Spare: "+part+"%0A"
++"Maelezo: "+notes;
+
+window.open("https://wa.me/255715555005?text="+message);
+
+}
+
+</script>
+
+</body>
+</html>
