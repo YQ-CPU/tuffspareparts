@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Tuff Spare Parts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="icon" type="image/png" href="img/favicon.png" />
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,11 +16,12 @@
     }
     
     header img {
-      width: 100%; max-widht: 200px;
-      height: auto; top: 30px;
+      width: 100%; 
+      height: auto;
       object-fit: cover;
       background: #ffffff;
-      border-radius: 35px;
+      border-radius: 50px;
+      margin-top: 170px;
     }
 
     h1 {
@@ -32,8 +33,8 @@
 
     #avatar {
   position: fixed;
-  top: 50px;
-  left: 20px;
+  top: 30px;
+  right: 20px;
 
   display: flex;
   flex-direction: row; /* muhimu: picha kushoto, text kulia */
@@ -45,8 +46,8 @@
 
     #avatar img {
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   object-fit: cover;
   border: 3px solid #25D366;
   box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
@@ -110,11 +111,10 @@
       flex-direction: column;
       align-items: center;
       width: 80%;
-      
       margin: auto;
-      margin-bottom: 40px;
+      margin-bottom: 80px;
       background: rgba(255,255,255,0.95);
-      padding: 10px;
+      padding: 30px;
       border-radius: 20px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.1);
     }
@@ -168,18 +168,32 @@
         padding: 14px;
       }
     }
+    
+    #whatsappFloat {
+  position: fixed;
+  bottom: 20px;
+  left: 30px;
+  background: #25D366;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
   </style>
 </head>
 <body>
   <header>
-    <img src="tuff-logo.png" alt="Tuff Spare Parts">
+    <img src="img/tuff-logo.png" alt="Tuff Spare Parts">
   </header>
-  <h1>🏆 Original & Genuine Spare Parts</h1>
+  <h1>🏆 High Quality Spare Parts</h1>
 
   <!-- Avatar ya Professional -->
-  <div id="avatar">
-    <img id="avatarImg" src="avatar.png" alt="Tuff Helper">
-    <p id="avatarMessage">👋 Habari! Karibu Unahitaji nini leo</p>
+  <div id="avatar" onclick="quickChat()">
+    <img id="avatarImg" src="img/avatar.png""https://i.imgur.com/4AiXzf8.png" alt="Tuff Helper">
+    <p id="avatarMessage">👋 Habari! Karibu Unahitaji nini leo?</p>
   </div>
 
   <!-- Fomu ya Order -->
@@ -199,8 +213,14 @@
     <input type="text" id="chassis" placeholder="🔢 Chassis Number">
     <input type="text" id="part" placeholder="🔧 Spare Part unazotafuta">
     <textarea id="notes" placeholder="📄 Maelezo ya ziada (optional)" rows="3"></textarea>
-    <button type="button" onclick="sendOrder()">🚀 Tuma Order WhatsApp Sasa</button>
+    <button type="button" onclick="sendOrder()" id="sendBtn">
+  🚀 Tuma Order WhatsApp Sasa
+    </button>
   </form>
+  
+  <a href="https://wa.me/255715555005" target="_blank" id="whatsappFloat">
+  💬 Chat Now
+</a>
 
   <script>
     // Avatar professional interactions
@@ -265,6 +285,56 @@
 
       window.open("https://wa.me/255715555005?text=" + encodeURIComponent(message), '_blank');
     }
+    
+    
+const autoMessages = [
+  "👋 Karibu Tuff Spare Parts!",
+  "🚗 Unatafuta spare part gani?",
+  "⚡ Tutakuhudumia haraka sana!",
+  "💬 Bonyeza hapa kuandika order yako"
+];
+
+let i = 0;
+setInterval(() => {
+  avatarMsg.innerText = autoMessages[i];
+  avatarImg.classList.add("avatar-talking");
+
+  setTimeout(() => {
+    avatarImg.classList.remove("avatar-talking");
+  }, 1500);
+
+  i = (i + 1) % autoMessages.length;
+}, 5000);
+
+function quickChat() {
+  let msg = "Habari 👋 Natafuta spare parts kutoka Tuff Spare Parts";
+  window.open("https://wa.me/255715555005?text=" + encodeURIComponent(msg), "_blank");
+}
+
+function sendOrder() {
+  let btn = document.getElementById("sendBtn");
+  btn.innerText = "⏳ Inatuma...";
+  btn.disabled = true;
+
+  setTimeout(() => {
+    // code yako ya WhatsApp hapa
+    window.open("https://wa.me/255715555005", "_blank");
+
+    btn.innerText = "✅ Imetumwa!";
+  }, 1500);
+}
+
+let data = {
+  name: name,
+  phone: phone,
+  brand: brand,
+  model: model,
+  part: part
+};
+
+localStorage.setItem("tuff_lead", JSON.stringify(data));
+
+
   </script>
 </body>
 </html>
