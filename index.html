@@ -4,337 +4,190 @@
   <meta charset="UTF-8">
   <title>Tuff Spare Parts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="favicon.png" />
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
       background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
       margin: 0;
-      padding: 0;
-      min-height: 100vh;
+      padding-top: 180px;
     }
-    
+
     header img {
-      width: 100%; 
-      height: auto;
-      object-fit: cover;
-      background: #ffffff;
-      border-radius: 50px;
-      margin-top: 170px;
+      width: 100%;
+      border-radius: 15%;
     }
 
     h1 {
       color: #2c3e50;
-      margin: 20px 0;
-      font-size: 2.2em;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     }
 
     #avatar {
-  position: fixed;
-  top: 30px;
-  right: 20px;
-
-  display: flex;
-  flex-direction: row; /* muhimu: picha kushoto, text kulia */
-  align-items: center;
-  gap: 10px;
-
-  z-index: 9999;
-}
-
-    #avatar img {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border: 3px solid #25D366;
-  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-  transition: all 0.3s ease;
-      animation: float 3s ease-in-out infinite;
+      position: fixed;
+      top: 20px;
+      left: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 9999;
+      background: #66ff557b;
+      border-radius: 30px;
+      padding: 20px;
     }
 
-    #avatar img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
+    #avatar img {
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      border: 3px solid #25D366;
     }
 
     #avatarMessage {
-  font-weight: 600;
-  color: #2c3e50;
-  font-size: 0.9em;
-
-  padding: 10px 15px;
-  background: rgba(255,255,255,0.95);
-
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  
-  position: relative;
-  
-  max-width: 200px;
-  text-align: left;
-}
-
-#avatarMessage::after {
-  content: "";
-  position: absolute;
-  left: -6px;
-  top: 15px;
-  border-width: 6px;
-  border-style: solid;
-  border-color: transparent rgba(255,255,255,0.95) transparent transparent;
-}  
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-
-    @keyframes messagePop {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    @keyframes talk {
-      0%, 100% { transform: scaleY(1); }
-      50% { transform: scaleY(0.95); }
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 180px;
     }
 
     .avatar-talking img {
-      animation: talk 0.5s ease-in-out infinite;
+      animation: talk 0.5s infinite;
+    }
+
+    @keyframes talk {
+      0%,100%{transform:scaleY(1);}
+      50%{transform:scaleY(0.9);}
     }
 
     form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       width: 80%;
+      max-width: 400px;
       margin: auto;
-      margin-bottom: 80px;
-      background: rgba(255,255,255,0.95);
-      padding: 30px;
+      background: white;
+      padding: 20px;
       border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
     }
 
     input, select, textarea {
-      width: 100%;
-      padding: 15px;
+      width: 90%;
+      padding: 12px;
       margin: 10px 0;
-      border-radius: 12px;
-      border: 2px solid #e1e8ed;
-      font-size: 16px;
-      box-sizing: border-box;
-      transition: all 0.3s ease;
-      background: #fff;
+      border-radius: 10px;
+      border: 1px solid #ccc;
     }
-
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: #25D366;
-      box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
-      transform: translateY(-2px);
+    
+    select#brand{
+      width: 100%;
     }
 
     button {
-      padding: 18px;
-      background: linear-gradient(45deg, #25D366, #20b358);
+      padding: 15px;
+      background: #25D366;
       color: white;
       border: none;
-      border-radius: 12px;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 15px;
+      border-radius: 10px;
       width: 100%;
-      transition: all 0.3s ease;
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+      font-size: 16px;
     }
-
-    button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
-    }
-
-    @media (max-width: 500px) {
-      #avatar img {
-        width: 120px;
-        height: 120px;
-      }
-      input, select, textarea, button {
-        font-size: 16px;
-        padding: 14px;
-      }
-    }
-    
-    #whatsappFloat {
-  position: fixed;
-  bottom: 20px;
-  left: 30px;
-  background: #25D366;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-}
-
   </style>
 </head>
 <body>
-  <header>
-    <img src="tuff-logo.png" alt="Tuff Spare Parts">
-  </header>
-  <h1>🏆 High Quality Spare Parts</h1>
 
-  <!-- Avatar ya Professional -->
-  <div id="avatar" onclick="quickChat()">
-    <img id="avatarImg" src="avatar.png""https://i.imgur.com/4AiXzf8.png" alt="Tuff Helper">
-    <p id="avatarMessage">👋 Habari! Karibu Unahitaji nini leo?</p>
-  </div>
+<header>
+  <img src="img/tuff logo.jpg">
+</header>
 
-  <!-- Fomu ya Order -->
-  <form id="orderForm">
-    <input type="text" id="name" placeholder="📝 Jina lako kamili">
-    <input type="tel" id="phone" placeholder="📱 Namba yako ya simu">
-    <select id="brand">
-      <option value="">Chagua Brand</option>
-      <option>Land Rover</option>
-      <option>Audi</option>
-      <option>Volkswagen</option>
-      <option>Mercedes Benz</option>
-      <option>BMW</option>
-      <option>Mini Cooper</option>
-    </select>
-    <input type="text" id="model" placeholder="🚗 Model ya gari">
-    <input type="text" id="chassis" placeholder="🔢 Chassis Number">
-    <input type="text" id="part" placeholder="🔧 Spare Part unazotafuta">
-    <textarea id="notes" placeholder="📄 Maelezo ya ziada (optional)" rows="3"></textarea>
-    <button type="button" onclick="sendOrder()" id="sendBtn">
-  🚀 Tuma Order WhatsApp Sasa
-    </button>
-  </form>
-  
-  <a href="https://wa.me/255715555005" target="_blank" id="whatsappFloat">
-  💬 Chat Now
-</a>
+<h1>🏆 High Quality Spare Parts</h1>
 
-  <script>
-    // Avatar professional interactions
-    const avatarImg = document.getElementById("avatarImg");
-    const avatarMsg = document.getElementById("avatarMessage");
+<!-- AVATAR -->
+<div id="avatar">
+  <img id="avatarImg" src="img/avatar.png">
+  <p id="avatarMessage">👋Habari! Karibu Tuff Spare Parts. Niko hapa kukusaidia.</p>
+</div>
+
+<!-- FORM -->
+<form>
+  <input type="text" id="name" placeholder="Jina">
+  <input type="tel" id="phone" placeholder="Simu">
+  <select id="brand">
+    <option value="">Brand</option>
+    <option>AUDI</option>
+    <option>BMW</option>
+    <option>LAND ROVER</option>
+    <option>MERCEDES BENZ</option>
+    <option>MINI COOPER</option>
+    <option>RANGE ROVER</option>
+    <option>VOLKSWAGEN</option>
     
-    const messages = {
-      name: "😊 Tafadhali weka jina lako kamili",
-      phone: "📱 Sasa weka namba yako ya simu (255...)",
-      brand: "🚗 Chagua brand ya gari lako kutoka list",
-      model: "📝 Andika model kamili ya gari lako",
-      chassis: "🔢 Chassis number inasaidia kupata spare sahihi",
-      part: "🔧 Andika jina la spare part unazohitaji",
-      notes: "💬 Ongeza maelezo yoyote muhimu hapa"
-    };
+  </select>
+  <input type="text" id="chesses" placeholder="Chesses">
+  <input type="text" id="model" placeholder="Model">
+  <input type="text" id="part" placeholder="Spare Part">
+  <button type="button" onclick="sendOrder()">Tuma WhatsApp</button>
+</form>
 
-    // Add event listeners for all inputs
-    Object.keys(messages).forEach(id => {
-      const element = document.getElementById(id);
-      if (element) {
-        element.addEventListener("focus", () => {
-          avatarMsg.innerText = messages[id];
-          avatarImg.classList.add("avatar-talking");
-        });
-        
-        element.addEventListener("blur", () => {
-          avatarImg.classList.remove("avatar-talking");
-          avatarMsg.innerText = "Karibu Sana Tuff Spare Parts! 👋 Nifahamishie unahitaji nini";
-        });
-      }
-    });
+<script>
+const avatarImg = document.getElementById("avatarImg");
+const avatarMsg = document.getElementById("avatarMessage");
 
-    // WhatsApp order function (same as before but improved)
-    function sendOrder() {
-      let name = document.getElementById("name").value.trim();
-      let phone = document.getElementById("phone").value.trim();
-      
-      if (!name || !phone) {
-        alert("❌ Tafadhali jaza jina na namba ya simu kwanza!");
-        return;
-      }
-      
-      if (!phone.startsWith('255') && phone.length > 10) {
-        phone = '255' + phone.slice(-9);
-      }
+// 🔊 SPEAK FUNCTION
+function speak(text) {
+  const speech = new SpeechSynthesisUtterance(text);
+  speech.lang = "sw-TZ";
+  speech.rate = 1;
 
-      let brand = document.getElementById("brand").value;
-      let model = document.getElementById("model").value;
-      let chassis = document.getElementById("chassis").value;
-      let part = document.getElementById("part").value;
-      let notes = document.getElementById("notes").value;
-
-      let message = "🔧 *ORDER TUFF SPARE PARTS* 🔧%0A%0A" +
-        "👤 *Jina:* " + name + "%0A" +
-        "📱 *Simu:* " + phone + "%0A" +
-        "🚗 *Brand:* " + brand + "%0A" +
-        "📝 *Model:* " + model + "%0A" +
-        "🔢 *Chassis:* " + chassis + "%0A" +
-        "🔧 *Spare Part:* " + part + "%0A" +
-        "💬 *Maelezo:* " + notes + "%0A%0A" +
-        "*Asante kwa kuchagua Tuff Spare Parts!* 💪";
-
-      window.open("https://wa.me/255715555005?text=" + encodeURIComponent(message), '_blank');
-    }
-    
-    
-const autoMessages = [
-  "👋 Karibu Tuff Spare Parts!",
-  "🚗 Unatafuta spare part gani?",
-  "⚡ Tutakuhudumia haraka sana!",
-  "💬 Bonyeza hapa kuandika order yako"
-];
-
-let i = 0;
-setInterval(() => {
-  avatarMsg.innerText = autoMessages[i];
   avatarImg.classList.add("avatar-talking");
 
-  setTimeout(() => {
+  speech.onend = () => {
     avatarImg.classList.remove("avatar-talking");
-  }, 1500);
+  };
 
-  i = (i + 1) % autoMessages.length;
-}, 5000);
-
-function quickChat() {
-  let msg = "Habari 👋 Natafuta spare parts kutoka Tuff Spare Parts";
-  window.open("https://wa.me/255715555005?text=" + encodeURIComponent(msg), "_blank");
+  window.speechSynthesis.speak(speech);
 }
 
-function sendOrder() {
-  let btn = document.getElementById("sendBtn");
-  btn.innerText = "⏳ Inatuma...";
-  btn.disabled = true;
-
-  setTimeout(() => {
-    // code yako ya WhatsApp hapa
-    window.open("https://wa.me/255715555005", "_blank");
-
-    btn.innerText = "✅ Imetumwa!";
-  }, 1500);
-}
-
-let data = {
-  name: name,
-  phone: phone,
-  brand: brand,
-  model: model,
-  part: part
+// 🎤 MESSAGES
+const messages = {
+  name: "Tafadhali weka jina lako kamili",
+  phone: "Weka namba yako ya simu",
+  brand: "Chagua brand ya gari lako",
+  chesses:"Weka chesses namba ya gari lako itasaidia kupata spare unazohitaji.",
+  model: "Andika modeli ya gari lako.",
+  part: "Ni spare part gani unazohitaji?"
 };
 
-localStorage.setItem("tuff_lead", JSON.stringify(data));
+// ✅ FIX: prevent null errors
+Object.keys(messages).forEach(id => {
+  const el = document.getElementById(id);
 
+  if (el) {
+    el.addEventListener("focus", () => {
+      const msg = messages[id];
+      avatarMsg.innerText = msg;
+      speak(msg);
+    });
+  }
+});
 
-  </script>
+// ✅ FIX: mobile autoplay restriction
+window.addEventListener("click", () => {
+  const welcome = "👋Habari! Karibu Taff Spea Parts. Mimi ni EI AI Niko hapa kukusaidia.";
+  avatarMsg.innerText = welcome;
+  speak(welcome);
+}, { once: true });
+
+// 📲 WHATSAPP
+function sendOrder() {
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let brand = document.getElementById("brand").value;
+  let model = document.getElementById("model").value;
+  let part = document.getElementById("part").value;
+
+  let msg = `REQUISTED ORDER:\nName:${name}\nPhone:${phone}\nBrand:${brand}\nModel:${model}\nPart:${part}`;
+
+  // ✅ FIX: encoding
+  window.open("https://wa.me/255715555005?text=" + encodeURIComponent(msg));
+}
+</script>
+
 </body>
 </html>
